@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name='jdbcTypeForNull'	value='NULL'/>
+	</settings>
+
+	<typeAliases>
+		
+	</typeAliases>
+	
+	<!-- 원래 DB접속 관련된 내용들을 작성했으나 다룬곳에서 작성 -->
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml"/>	
+		<mapper resource="/mappers/board-mapper.xml"/>	
+	</mappers>
+</configuration>
