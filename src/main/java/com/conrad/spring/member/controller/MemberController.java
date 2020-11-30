@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +18,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	
 //	@RequestMapping("login.me") //HandlerMapping으로 등록
@@ -91,7 +95,7 @@ public class MemberController {
 	public ModelAndView loginMember(Member m,HttpSession session, ModelAndView mv) {
 		Member loginUser = mService.loginMember(m);
 		
-		if(loginUser != null) {
+		if(loginUser != null && bCryptPasswordEncoder.matches(m.getUserPwd(),loginUser.getUserPwd())) {
 			session.setAttribute("loginUser",loginUser);
 			mv.setViewName("redirect:/");			
 		}else {
@@ -112,11 +116,21 @@ public class MemberController {
 	}
 
 	@RequestMapping("insert.me")
-	public void insertMember(Member m) {
-		System.out.println(m);
+	public String insertMember(Member m, Model model) {
+		//System.out.println(m.getUserPwd());
+		m.setUserPwd(bCryptPasswordEncoder.encode(m.getUserPwd()));
+
+		int result = mService.insertMember(m);
+
+		if(result>0){
+			return "redirect:/";
+		}else{
+			model.addAttribute("errorMsg","회원가입 실패요^^");
+			return "common/errorPage";
+		}
 	}
 	
 	public void updateMember() {
-		
+
 	}
 }
