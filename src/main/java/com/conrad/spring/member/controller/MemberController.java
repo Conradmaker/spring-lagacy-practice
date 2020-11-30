@@ -102,6 +102,12 @@ public class MemberController {
 		}
 		return mv;
 	}
+	@RequestMapping("logout.me")
+	public ModelAndView logoutMember(HttpSession session,ModelAndView mv) {
+		session.invalidate();
+		mv.setViewName("redirect:/");
+		return mv;
+	}
 	@RequestMapping("insert.me")
 	public void insertMember() {
 		
