@@ -81,7 +81,7 @@
                <c:otherwise>
                
                 <!-- 로그인 후  -->
-                <label>홍길동님 환영합니다</label> &nbsp;&nbsp;
+                <label>${loginUser.userName}님 환영합니다</label> &nbsp;&nbsp;
                 <a href="">마이페이지</a>
                 <a href="">로그아웃</a>
                 

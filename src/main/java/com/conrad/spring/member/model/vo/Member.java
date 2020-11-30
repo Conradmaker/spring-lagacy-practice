@@ -10,6 +10,7 @@ public class Member {
 	private String gender;
 	private int age;
 	private String phone;
+	private String address;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
@@ -73,6 +74,14 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public Date getEnrollDate() {
 		return enrollDate;
@@ -99,7 +108,7 @@ public class Member {
 	}
 
 	public Member(String userId, String userPwd, String userName, String email, String gender, int age, String phone,
-			Date enrollDate, Date modifyDate, String status) {
+			String address, Date enrollDate, Date modifyDate, String status) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -108,6 +117,7 @@ public class Member {
 		this.gender = gender;
 		this.age = age;
 		this.phone = phone;
+		this.address = address;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;

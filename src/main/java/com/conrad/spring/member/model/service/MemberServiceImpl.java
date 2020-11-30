@@ -8,7 +8,7 @@ import com.conrad.spring.member.model.dao.MemberDao;
 import com.conrad.spring.member.model.vo.Member;
 
 @Service
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -18,9 +18,7 @@ public class MemberServiceImpl {
 	
 	@Override
 	public Member loginMember(Member m) {
-		Member loginUser = mDao.loginMember(sqlSession,m);
-		
-		return loginUser;
+		return mDao.loginMember(sqlSession,m);
 	}
 	
 	@Override
