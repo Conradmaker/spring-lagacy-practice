@@ -5,9 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.conrad.spring.member.model.service.MemberService;
@@ -108,9 +106,14 @@ public class MemberController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
+	@RequestMapping("enrollForm.me")
+	public String enrollForm() {
+		return "member/memberEnrollForm";
+	}
+
 	@RequestMapping("insert.me")
-	public void insertMember() {
-		
+	public void insertMember(Member m) {
+		System.out.println(m);
 	}
 	
 	public void updateMember() {

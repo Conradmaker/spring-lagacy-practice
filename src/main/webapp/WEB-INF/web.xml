@@ -38,4 +38,18 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+<!--	한글깨짐 방지용 인코딩 필터-->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+<!--	어떤 url로 요청이던간에 해당 등록된 필터 가치게끔 매핑-->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

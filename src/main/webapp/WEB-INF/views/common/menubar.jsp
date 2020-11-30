@@ -74,7 +74,7 @@
                
                <c:when test="${empty loginUser }">
                 <!-- 로그인 전 -->
-                <a href="">회원가입</a> | 
+                <a href="enrollForm.me">회원가입</a> | 
                 <a data-toggle="modal" data-target="#loginModal">로그인</a> <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div가 보이는 거임 -->
                 
                </c:when>
@@ -91,7 +91,7 @@
         </div>
         <div id="header_2">
             <ul>
-                <li><a href="">HOME</a></li>
+                <li><a href="/spring/">HOME</a></li>
                 <li><a href="">공지사항</a></li>
                 <li><a href="">자유게시판</a></li>
                 <li><a href="">사진게시판</a></li>
