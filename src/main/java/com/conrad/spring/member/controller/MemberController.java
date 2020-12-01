@@ -116,21 +116,36 @@ public class MemberController {
 	}
 
 	@RequestMapping("insert.me")
-	public String insertMember(Member m, Model model) {
+	public String insertMember(Member m, Model model,HttpSession session) {
 		//System.out.println(m.getUserPwd());
 		m.setUserPwd(bCryptPasswordEncoder.encode(m.getUserPwd()));
 
 		int result = mService.insertMember(m);
 
 		if(result>0){
+			session.setAttribute("alertMsg","성공");
 			return "redirect:/";
 		}else{
 			model.addAttribute("errorMsg","회원가입 실패요^^");
 			return "common/errorPage";
 		}
 	}
-	
-	public void updateMember() {
+	@RequestMapping("myPage.me")
+	public String myPage() {
+		return "/member/myPage";
+	}
+	@RequestMapping("update.me")
+	public String updateMember(Model model,HttpSession session,Member m){
+		int result = mService.updateMember(m);
 
+		if(result>0){
+
+			session.setAttribute("loginUser",mService.loginMember(m));
+			session.setAttribute("alertMsg","정보변경성공");
+			return "main";
+		}else{
+			model.addAttribute("errorMsg","회원가입 실패요^^");
+			return "common/errorPage";
+		}
 	}
 }

@@ -48,5 +48,14 @@
             #{address}
            )
 	</insert>
-
+	<update id="updateMember">
+		update MEMBER
+    	set EMAIL= #{email} ,
+       		GENDER =#{gender},
+        	AGE =#{age},
+        	PHONE = #{phone},
+        	ADDRESS = #{address},
+        	MODIFY_DATE = sysdate
+		where USER_ID = #{userId}
+	</update>
 </mapper>
