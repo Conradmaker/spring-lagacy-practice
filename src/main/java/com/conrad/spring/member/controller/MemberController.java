@@ -148,4 +148,24 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	@RequestMapping("delete.me")
+	public String deleteMember(HttpSession session,Model model,String userPwd){
+		//userPwd : 비밀번호
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String encPwd = loginUser.getUserPwd();
+		if(bCryptPasswordEncoder.matches(userPwd,encPwd)){
+			int result = mService.deleteMember(loginUser.getUserId());
+			if(result>0){
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg","성공적으로 회원탈퇴 되었습니다.");
+				return "redirect:/";
+			}else{
+				model.addAttribute("errorMsg","회원탈퇴 실패요^^.");
+				return "common/errorPage";
+			}
+		}else{
+			model.addAttribute("errorMsg","비밀번호가 틀렸습니다.");
+			return "common/errorPage";
+		}
+	}
 }
