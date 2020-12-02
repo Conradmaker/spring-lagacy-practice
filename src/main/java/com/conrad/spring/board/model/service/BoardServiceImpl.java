@@ -28,10 +28,10 @@ public class BoardServiceImpl implements BoardService {
         return bDao.selectBoardList(sqlSession, pi);
     }
 
-//    @Override
-//    public int insertBoard(Board b) {
-//        return 0;
-//    }
+    @Override
+    public int insertBoard(Board b) {
+       return bDao.insertBoard(sqlSession,b);
+   }
 //
 //    @Override
 //    public int increaseCount(int bno) {

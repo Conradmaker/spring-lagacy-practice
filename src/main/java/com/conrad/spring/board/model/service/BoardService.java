@@ -10,4 +10,5 @@ public interface BoardService {
     int selectListCount();
     ArrayList<Board> selectBoardList(PageInfo pi);
     //2.게시판 작성용 서비스
+    int insertBoard(Board b);
 }
