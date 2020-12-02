@@ -91,7 +91,22 @@ public class BoardController {
 
         return changeName;
     }
+    @RequestMapping("detail.bo")
+    public String selectBoard(int bno,Model model){
+        int result = bService.increaseCount(bno);
 
+        if(result>0){
+
+            Board b = bService.selectBoard(bno);
+
+            model.addAttribute("b",b);
+
+            return "board/boardDetailView";
+        }else{
+            model.addAttribute("errorMsg","유효하지 않은 게시글이에요^^");
+            return "common/errorPage";
+        }
+    }
 }
 
 

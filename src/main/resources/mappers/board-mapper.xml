@@ -52,7 +52,26 @@
                )
     </insert>
 
+    <update id="increaseCount" parameterType="_int">
+        update
+            BOARD
+        set
+            COUNT = COUNT+1
+        where STATUS = 'Y' and BOARD_NO = #{bno}
+    </update>
 
+    <select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+        select
+            BOARD_NO,
+               BOARD_TITLE,
+               BOARD_WRITER,
+               to_char(CREATE_DATE,'YYYY-MM-DD')"create_date",
+               BOARD_CONTENT,
+               ORIGIN_NAME,
+               CHANGE_NAME
+        from BOARD
+        where BOARD_NO = #{bno}
+    </select>
 
 
 </mapper>
