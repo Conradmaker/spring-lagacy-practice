@@ -16,7 +16,7 @@ import com.conrad.spring.common.template.Pagination;
 
 @Controller
 public class BoardController {
-
+  
     @Autowired
     private BoardService bService;
 
