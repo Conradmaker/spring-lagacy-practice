@@ -48,9 +48,9 @@ public class BoardServiceImpl implements BoardService {
 //        return 0;
 //    }
 //
-//    @Override
-//    public int deleteBoard(int bno) {
-//        return 0;
-//    }
+    @Override
+    public int deleteBoard(int bno) {
+        return bDao.deleteBoard(sqlSession , bno);
+    }
 
 }

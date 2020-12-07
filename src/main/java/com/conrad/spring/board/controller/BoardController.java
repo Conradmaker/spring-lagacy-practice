@@ -107,6 +107,22 @@ public class BoardController {
             return "common/errorPage";
         }
     }
+
+    @RequestMapping("delete.bo")
+    public String deleteBoard(int bno,String filename, HttpSession session,Model model){
+        int result = bService.deleteBoard(bno);
+        if(result > 0){
+            //기존파일 삭제
+            if(!filename.equals("")){
+                new File(session.getServletContext().getRealPath(filename)).delete();
+            }
+            session.setAttribute("alertMsg","성공적으로 삭제되었습니다.");
+            return "redirect:list.bo";
+        }else{
+            model.addAttribute("errorMsg","게시글삭제실패");
+            return "common/errorPage";
+        }
+    }
 }
 
 

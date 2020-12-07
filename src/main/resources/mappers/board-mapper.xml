@@ -73,5 +73,9 @@
         where BOARD_NO = #{bno}
     </select>
 
-
+    <update id="deleteBoard" parameterType="_int">
+        update BOARD
+        set STATUS = 'N'
+        where BOARD_NO = #{bno}
+    </update>
 </mapper>
