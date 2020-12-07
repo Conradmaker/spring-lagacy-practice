@@ -20,9 +20,20 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<context:component-scan base-package="com.conrad.spring" />
-	
-	
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/myPage.me"/>
+			<mapping path="/list.bo"/>
+			<mapping path="/detail.bo"/>
+			<mapping path="/updateForm.bo"/>
+			<mapping path="/delete.bo"/>
+			<beans:bean id="loginInterceptor" class="com.conrad.spring.common.interceptor.LoginInterceptor"/>
+
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
+
