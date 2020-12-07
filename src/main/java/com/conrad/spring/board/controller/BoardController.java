@@ -123,6 +123,31 @@ public class BoardController {
             return "common/errorPage";
         }
     }
+    @RequestMapping("updateForm.bo")
+    public String updateForm(int bno,Model model){
+        model.addAttribute("b",bService.selectBoard(bno));
+        return "board/boardUpdateForm";
+    }
+
+    @RequestMapping("update.bo")
+    public String updateBoard(Board b, MultipartFile reupFile, HttpSession session,Model model){
+        if(!reupFile.getOriginalFilename().equals("")){
+            //만약 기존의 첨부파일이 있었을 경우 => 삭제
+            new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+            //새로 전달된 첨부파일 => 업로드
+            String changeName =  saveFile(session,reupFile);
+            b.setOriginName(reupFile.getOriginalFilename());
+            b.setChangeName("resources/uploads/"+changeName);
+        }
+        int result = bService.updateBoard(b);
+        if(result > 0){
+            session.setAttribute("alertMsg","성공적으로 게시글이 수정되었습니다");
+            return "redirect:detail.bo?bno="+b.getBoardNo();
+        }else{
+            model.addAttribute("errorMsg","게시글 수정 실패");
+            return "common/errorPage";
+        }
+    }
 }
 
 

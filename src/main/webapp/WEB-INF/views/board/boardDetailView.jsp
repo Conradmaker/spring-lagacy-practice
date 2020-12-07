@@ -65,8 +65,8 @@
         <c:if test="${loginUser.userId eq b.boardWriter}">
             <div align="center">
                 <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-                <a class="btn btn-primary" onclick="postFormSubmit(1)" href="">수정하기</a>
-                <a class="btn btn-danger" onclick="postFormSubmit(2)" href="">삭제하기</a>
+                <button type="button" class="btn btn-primary" onclick="postFormSubmit(1)">수정하기</button>
+                <button type="button" class="btn btn-danger" onclick="postFormSubmit(2)">삭제하기</button>
             </div><br><br>
         </c:if>
         <form action="" method="post" id="postForm">
