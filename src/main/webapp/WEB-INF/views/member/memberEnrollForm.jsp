@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -21,10 +22,11 @@
             <form action="insert.me" method="post" onsubmit="">
                 <div class="form-group">
                     <label for="userId">* ID :</label>
-                    <input type="text" class="form-control" id="userId" name="userId" placeholder="Please Enter ID" required><br>
-                    
+                    <input type="text" class="form-control" id="userIdE" name="userId" placeholder="Please Enter ID" required><br>
+                    <div id="check-result" style="font-size: 0.8em;display:none"></div>
+
                     <label for="userPwd">* Password :</label>
-                    <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Please Enter Password" required><br>
+                    <input type="password" class="form-control" id="userPwdE" name="userPwd" placeholder="Please Enter Password" required><br>
                     
                     <label for="checkPwd">* Password Check :</label>
                     <input type="password" class="form-control" id="checkPwd" placeholder="Please Enter Password" required><br>
@@ -53,7 +55,7 @@
                 </div>
                 <br>
                 <div class="btns" align="center">
-                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button id="enroll-btn" disabled type="submit" class="btn btn-primary">회원가입</button>
                     <button type="reset" class="btn btn-danger"> 초기화</button>
                 </div>
             </form>
@@ -61,6 +63,33 @@
         <br><br>
     </div>
 
+    <script defer>
+        document.querySelector('#userIdE').addEventListener('input',(e)=>{
+            if(e.target.value.length >= 5){
+                axios.post('idCheck.me',{userId:e.target.value})
+                    .then((res)=>{
+                        if(res.data===1){
+                            document.querySelector('#check-result').style.display='block';
+                            document.querySelector('#check-result').innerHTML = '중복된 아이디입니다.';
+                            document.querySelector('#enroll-btn').setAttribute('disabled','true');
+                        }else{
+                            document.querySelector('#check-result').style.display='block';
+                            document.querySelector('#check-result').innerHTML = '사용가능한 아이디.';
+                            document.querySelector('#enroll-btn').setAttribute('disabled','false');
+                        }
+                    })
+                    .catch((e)=>{
+                        console.error(e)
+                    })
+
+            }else{
+                document.querySelector('#check-result').style.display='block';
+                document.querySelector('#check-result').innerHTML = '5글자이상 입력하세요';
+                document.querySelector('#enroll-btn').setAttribute('disabled','true');
+
+            }
+        })
+    </script>
     <!-- 이쪽에 푸터바 포함할꺼임 -->
     <jsp:include page="../common/footer.jsp"/>
     

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.conrad.spring.member.model.service.MemberService;
@@ -167,5 +168,11 @@ public class MemberController {
 			model.addAttribute("errorMsg","비밀번호가 틀렸습니다.");
 			return "common/errorPage";
 		}
+	}
+	@ResponseBody
+	@RequestMapping("idCheck.me")
+	public String idCheck(String userId){
+		System.out.println(userId);
+		return String.valueOf(mService.idCheck(userId));
 	}
 }
