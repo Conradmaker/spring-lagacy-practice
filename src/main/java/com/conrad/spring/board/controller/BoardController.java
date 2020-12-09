@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -156,6 +157,16 @@ public class BoardController {
     public String selectReplyList(int bno){
         ArrayList<Reply> list = bService.selectReplyList(bno);
         return new Gson().toJson(list);
+    }
+    @ResponseBody
+    @RequestMapping("rinsert.bo")
+    public String insertReply(Reply r){
+        int result = bService.insertReply(r);
+        if(result > 0){
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 }
 

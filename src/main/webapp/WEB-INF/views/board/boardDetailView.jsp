@@ -92,9 +92,9 @@
             <thead>
             <tr>
                 <th colspan="2">
-                    <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
+                    <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
                 </th>
-                <th style="vertical-align: middle"><button class="btn btn-secondary">등록하기</button></th>
+                <th style="vertical-align: middle"><button type="button" onclick="addReply()" class="btn btn-secondary">등록하기</button></th>
             </tr>
             <tr>
                 <td colspan="3">댓글 (<span id="rcount">3</span>) </td>
@@ -130,6 +130,30 @@
             .catch((e)=>{
                 console.error(e.response.data)
             })
+
+    }
+    const addReply = ()=>{
+        const contentValue = document.querySelector('#reply_content');
+        if(contentValue.value.trim().length !== 0){
+            console.log(contentValue)
+            axios.post('rinsert.bo',{
+                replyContent:contentValue.value.trim(),
+                refBoardNo:${b.boardNo},
+                replyWriter:"${loginUser.userId}"
+            })
+            .then((res)=>{
+                if(res.data==='success'){
+                    contentValue.value=""
+                    selectReplyList()
+                }
+            })
+            .catch((e)=>{
+                console.error(e.response.data)
+            })
+        }else{
+            console.log('공백')
+        }
+
     }
     selectReplyList();
 </script>
