@@ -1,6 +1,7 @@
 package com.conrad.spring.board.model.service;
 
 import com.conrad.spring.board.model.vo.Board;
+import com.conrad.spring.board.model.vo.Reply;
 import com.conrad.spring.common.model.vo.PageInfo;
 
 import java.util.ArrayList;
@@ -18,4 +19,7 @@ public interface BoardService {
 
     int deleteBoard(int bno);
     int updateBoard(Board bno);
+
+    ArrayList<Reply> selectReplyList(int bno);
+    int insertReply(Reply r);
 }

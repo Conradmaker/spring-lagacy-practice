@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
         table *{margin: 5px}
         table {width:100%}
@@ -99,28 +100,39 @@
                 <td colspan="3">댓글 (<span id="rcount">3</span>) </td>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th>user02</th>
-                <td>댓글입니다.너무웃기다앙</td>
-                <td>2020-04-10</td>
-            </tr>
-            <tr>
-                <th>user01</th>
-                <td>많이봐주세용</td>
-                <td>2020-04-08</td>
-            </tr>
-            <tr>
-                <th>admin</th>
-                <td>댓글입니다ㅋㅋㅋ</td>
-                <td>2020-04-02</td>
-            </tr>
+            <tbody class="board__reply__box">
+
             </tbody>
         </table>
     </div>
     <br><br>
 </div>
-
+<script defer>
+    const selectReplyList=()=>{
+        axios.post('rlist.bo',{bno:${b.boardNo}})
+            .then((res)=>{
+                res.data.forEach(v=>{
+                    const replyBox = document.createElement("tr")
+                    replyBox.className='board__reply'
+                    const writer = document.createElement("th")
+                    writer.innerText = v.replyWriter
+                    const content = document.createElement("td")
+                    content.innerText = v.replyContent
+                    const create = document.createElement("td")
+                    create.innerText = v.createDate
+                    replyBox.appendChild(writer);
+                    replyBox.appendChild(content);
+                    replyBox.appendChild(create);
+                    document.querySelector('.board__reply__box').appendChild(replyBox);
+                })
+                console.log(res.data)
+            })
+            .catch((e)=>{
+                console.error(e.response.data)
+            })
+    }
+    selectReplyList();
+</script>
 <!-- 이쪽에 푸터바 포함할꺼임 -->
 <jsp:include page="../common/footer.jsp"/>
 

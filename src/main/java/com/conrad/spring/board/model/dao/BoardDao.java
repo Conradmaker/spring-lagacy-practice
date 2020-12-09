@@ -2,6 +2,7 @@ package com.conrad.spring.board.model.dao;
 
 import java.util.ArrayList;
 
+import com.conrad.spring.board.model.vo.Reply;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -43,5 +44,9 @@ public class BoardDao {
 
     public int updateBoard(SqlSessionTemplate sqlSession, Board b){
         return sqlSession.update("boardMapper.updateBoard",b);
+    }
+
+    public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int bno) {
+        return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList",bno);
     }
 }

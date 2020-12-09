@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.conrad.spring.board.model.vo.Reply;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import com.conrad.spring.board.model.service.BoardService;
 import com.conrad.spring.board.model.vo.Board;
 import com.conrad.spring.common.model.vo.PageInfo;
 import com.conrad.spring.common.template.Pagination;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -147,6 +150,12 @@ public class BoardController {
             model.addAttribute("errorMsg","게시글 수정 실패");
             return "common/errorPage";
         }
+    }
+    @ResponseBody
+    @RequestMapping(value="rlist.bo",produces = "application/json; charset=utf-8")
+    public String selectReplyList(int bno){
+        ArrayList<Reply> list = bService.selectReplyList(bno);
+        return new Gson().toJson(list);
     }
 }
 

@@ -13,6 +13,12 @@
         <result column="create_date" property="createDate"/>
         <result column="status" property="status"/>
     </resultMap>
+    <resultMap id="replyResultSet" type="Reply">
+        <result column="reply_no" property="replyNo"/>
+        <result column="reply_content" property="replyContent"/>
+        <result column="reply_writer" property="replyWriter"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
 
 
     <select id="selectListCount" resultType="_int">
@@ -87,4 +93,15 @@
             CHANGE_NAME = #{changeName}
         where BOARD_NO = #{boardNo}
     </update>
+
+    <select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+        select REPLY_NO,
+               REPLY_CONTENT,
+               REPLY_WRITER,
+               to_char(CREATE_DATE,'YYYY--MM--DD') "create_date"
+        from REPLY
+        where REF_BNO = #{bno}
+        and STATUS = 'Y'
+        order by REPLY_NO desc
+    </select>
 </mapper>

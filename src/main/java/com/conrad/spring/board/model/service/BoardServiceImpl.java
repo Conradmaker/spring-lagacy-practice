@@ -3,6 +3,7 @@ package com.conrad.spring.board.model.service;
 import java.util.ArrayList;
 
 import com.conrad.spring.board.model.dao.BoardDao;
+import com.conrad.spring.board.model.vo.Reply;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,10 +48,20 @@ public class BoardServiceImpl implements BoardService {
     public int updateBoard(Board b) {
         return bDao.updateBoard(sqlSession,b);
     }
-//
+
     @Override
     public int deleteBoard(int bno) {
         return bDao.deleteBoard(sqlSession , bno);
+    }
+
+    @Override
+    public ArrayList<Reply> selectReplyList(int bno) {
+        return bDao.selectReplyList(sqlSession,bno);
+    }
+
+    @Override
+    public int insertReply(Reply r) {
+        return 0;
     }
 
 }
